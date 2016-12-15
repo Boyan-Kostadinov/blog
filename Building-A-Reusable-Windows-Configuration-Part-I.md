@@ -155,11 +155,11 @@ The most interesting, and most useful of the helpers is the **[InstallHelper](ht
 
 The purpose of **Get-InstallerPath** is to look for a setup executable, installer executable, installer path, an ISO image or a URL provided in the arguments. It uses the **Get-Parameters** function to parse the Chocolatey provided parameters, and then looks for one of the following in this exact order:
 
-	1. **Setup path** - An executable path provided with the parameter **/setup="Path.To.Exe"**
-	2. **Installer path** - An executable that unpacks the setup for the package.
-	3. **A package installer** - A combination of the path defined in **$env:packagesInstallers** and the **file** argument.
-	4. **An ISO path** - The path to the ISO image provided with the parameter **/iso="Path.To.Exe"**
-	5. **A URL to the installer** - Provided in the url argument. The file is downloaded and stored in the file argument.
+	1. Setup path - An executable path provided with the parameter **/setup="Path.To.Exe"**
+	2. Installer path - An executable that unpacks the setup for the package.
+	3. A package installer - A combination of the path defined in **$env:packagesInstallers** and the **file** argument.
+	4. An ISO path - The path to the ISO image provided with the parameter **/iso="Path.To.Exe"**
+	5. A URL to the installer - Provided in the url argument. The file is downloaded and stored in the file argument.
 
 The point of all this is to account for all possible scenarios when it comes to installing a package. This will make more sense when we get to the package creation stage.
 
@@ -210,7 +210,7 @@ Next comes the **[RegistryHelper](https://github.com/Boyan-Kostadinov/BoxStarter
  - **Import-RegistrySettings** - Given a file system path, it iterates over all the .reg files found and imports them with the Windows registry utility regedit.
  - **Import-RegistryFile** - Given a file, executable and a process name, it starts the executable, kills the process with the process name provided, and then imports the registry file provided in the file argument. The purpose is to start the program, and have it create it's default settings, kill it, and then import the provided registry settings.
 
-The **[SystemHelpesr](https://github.com/Boyan-Kostadinov/BoxStarter/blob/master/Boyan-Choco.extension/extensions/SystemHelpers.psm1)** module is nothing special. It defines the **StartAsScheduledTask** function and the **IsSystem32Bit** function.
+The **[SystemHelpers](https://github.com/Boyan-Kostadinov/BoxStarter/blob/master/Boyan-Choco.extension/extensions/SystemHelpers.psm1)** module is nothing special. It defines the **StartAsScheduledTask** function and the **IsSystem32Bit** function.
 
 The [**WindowsFeatures**](https://github.com/Boyan-Kostadinov/BoxStarter/blob/master/Boyan-Choco.extension/extensions/WindowsFeatures.psm1) module is slightly more interesting. It defines a way to install Windows features by using Chocolatey (and to be exact the special source in Chocolatey called **WindowsFeatures**). 
 	- **Enable-WindowsFeatures** - Provided a file path, passes that file to Invoke-Commands, using the template choco install ##token## -r -source WindowsFeatures -y.
